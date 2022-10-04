@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <title>Smartet</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="quiz.css">
 </head>
 
 <body>
@@ -18,32 +19,22 @@
     </div>
     <ul>
       <li><a onclick="changePage()" href="home.html">Home</a></li>
-      <li><a onclick="changePage()" href="quiz.html">Learn</a></li>
+      <li><a href="#">Learn</a></li>
       <li><a href="#">Library</a></li>
-      <button class="button">Create</button>
+      <button class="button create"><a onclick="changePage()" href="index.html">Create</a></button>
     </ul>
   </header>
 
-  <main class="create-page" id="create-page">
-    <div class="container-inputs">
-      <input type="text" class="textbox" id="card-name">
-      <input type="text" class="textbox" id="card-description">
-      <button id="click" class="button create-new" onclick="new_Card()">Create New</button>
-    </div>
-    <div class="container-title">
-      <h3>Card</h3>
-      <h3>Description</h3>
-    </div>
-    
-    <div id="card-container" class="card-container">
+  <main>
+    <div class="container-div" id="container-div">
+      <button class="button initiate" id="initiate-button" onclick="storeArray(), runFlashCard()">Start</button>
     </div>
 
-    <button id="practice-button" class="practice" onclick="runFlashCard()">Practice</button>
+    <div id="arrow-container" class="arrow-buttons">
+      <button class="arrow"  onclick="runFlashCard()">&#8592</button>
+      <button class="arrow" onclick="runFlashCard()" >&#8594</button>
+    </div>
   </main>
-
-  <!-- <main>
-    <button onclick="runFlashCard()">Test</button>
-  </main> -->
 
   <script src="script.js"></script>
 </body>

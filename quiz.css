@@ -1,0 +1,41 @@
+main{
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.container-div{
+  width: 600px;
+  height: 500px;
+  background-color: white;
+  display: grid;
+  place-items: center;
+  font-size: 1.75rem;
+}
+
+.initiate{
+  font-size: 1rem;
+}
+
+.arrow-buttons{
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  column-gap: 400px;
+  display: none;
+}
+
+.arrow{
+  font-size: 2rem;
+  color: white;
+  border-radius: 300px;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid transparent;
+  background-color: rgb(178, 179, 228);
+}
+
+
+
+
+
+
