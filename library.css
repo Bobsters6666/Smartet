@@ -1,10 +1,14 @@
-section{
+.first-section-library{
   display: grid;
   place-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 50px;
   column-gap: 50px;
-  margin: 50px
+  margin: 150px 50px
+}
+
+.second-section-library{
+  display: none;
 }
 
 .library-gridItems{
@@ -13,4 +17,5 @@ section{
   background-color: white;
   display: grid;
   place-items: center;
+  position: relative;
 }

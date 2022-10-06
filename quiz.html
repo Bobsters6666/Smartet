@@ -54,13 +54,27 @@
     </section>
     <section class="second-section" id="second-section">
       <div class="container-div" id="container-div">
-        <button class="button initiate" id="initiate-button" onclick="runFlashCard()">Start</button>
+
+        <div id="card-name-div" class="card-front"></div>
+        <div id="card-description-div" class="card-back"></div>
+
+        <div id="arrow-container" class="arrow-buttons">
+          <button class="arrow"  onclick="runFlashCard()"></button>
+          <button class="arrow" onclick="runFlashCard()" ></button>
+        </div>  
       </div>
-  
-      <div id="arrow-container" class="arrow-buttons">
-        <button class="arrow"  onclick="runFlashCard()">&#8592</button>
-        <button class="arrow" onclick="runFlashCard()" >&#8594</button>
+      <div class="container-div test">
+        Hello
       </div>
+      
+      <div class="container-div test2">
+        Hello
+      </div>
+      
+      <div class="container-div test3">
+        Hello
+      </div>
+      
       <button class="button back-button" onclick="returnToPrevious()">Return</button>
     </section>
   </main>
