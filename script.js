@@ -2,10 +2,12 @@
 const cardContainer = document.getElementById('card-container')
 const cardName = document.getElementById('card-name')
 const cardDescription = document.getElementById('card-description')
-const practiceButton = document.getElementById('practice-button')
+const saveButton = document.getElementById('save-button')
 const createPage = document.getElementById('create-page')
 
 let cards = []
+let selectedCard = []
+let selectedId = []
 
 //push new card to cards and reseting texbox values
 function new_Card(){
@@ -49,6 +51,11 @@ function render(){
     binIcon.id = card.id
     divDescription.appendChild(binIcon)
     binIcon.onclick = function(){delete_card(binIcon.id)}
+
+    if (cards[0].length > 0 || cards.length > 1) {
+      saveButton.style.display = 'inline-block'
+    } else{saveButton.style.display = 'none'}
+    console.log(2)
   })
 }
 
@@ -56,30 +63,13 @@ function render(){
 const containerDiv = document.getElementById('container-div')
 const runFlashCardButton = document.getElementById('initiate-button')
 const arrowContainer = document.getElementById('arrow-container')
-
+const cardSet = document.getElementsByClassName('cardset')
+const practiceButton = document.getElementsByClassName('practice-button')
+const firstSection = document.getElementById('first-section')
+const secondSection = document.getElementById('second-section')
 
 //stores cards array in local storage so doesn't get reset when swapping html files / pages
-function storeArray(){
-  cards.push(JSON.parse(localStorage.getItem('card')))
-}
 
-function runFlashCard(){
-  if (isCardName) {
-    containerDiv.innerHTML = cards[i][j].cardName
-  }else{
-    containerDiv.innerHTML = cards[i][j].cardDescription
-  }
-  
-  arrowContainer.style.display = 'flex'
-}
-
-function changePage(){
-  localStorage.clear()
-  localStorage.setItem("card", JSON.stringify(cards))
-}
-
-
-let i = 0
 
 //card number
 let j = 0
@@ -89,62 +79,67 @@ let rightArrowPressed = false
 
 isCardName = true;
 
-function checkArrowPressed(){
-  if (leftArrowPressed && isCardName) {
-    if (j > 0){
-      j--
-      leftArrowPressed = false
-      isCardName = false;
-      runFlashCard()
-    }else{leftArrowPressed = false}
-  } 
+function runFlashCard(item){
 
-  else if (leftArrowPressed && isCardName === false) {
-    isCardName = true;
-    console.log('left', isCardName)
-    runFlashCard()
-  }
+  //rewrite the text within the cardSet to the key of the local storage (i)
+  for (let i = 0; i < localStorage.length; i++ ){
+    item[i].innerText = localStorage.key(i)
 
-  else if(rightArrowPressed && isCardName) {
-    isCardName = false;
-    console.log('right', isCardName)
-    runFlashCard()
+    // selectedCard.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+    let currentObject = JSON.parse(localStorage.getItem(localStorage.key(i)))
+    selectedId.push(currentObject[0].id)
+    practiceButton[i].id = currentObject[0].id
+    
   }
-  
-  else if (rightArrowPressed && isCardName === false && cards[0].length > (j+1)) {
-    j++ 
-    rightArrowPressed = false
-    isCardName = true
-    runFlashCard()
+}
+
+//checks the id of the button pressed with the id of cardSets to see which cardSet matches it. 
+function findSelectedFlashCard(index){
+  for (let i = 0; i < selectedId.length; i ++) {
+    if (selectedId[i] == practiceButton[index].id) {
+      firstSection.style.display = 'none'
+      secondSection.style.display = 'inline-block'
+      arrowContainer.style.display = 'flex'
+
+      runCurrentFlashCard(localStorage.key(i))
+
+    }else{}
   } 
-  else{console.log('cant')}
+}
+
+function runCurrentFlashCard(cardsetName){
+  selectedCard.push(JSON.parse(localStorage.getItem(cardsetName)))
+  if (isCardName) {
+    containerDiv.innerText = selectedCard[0][j].cardName
+  }else{
+    containerDiv.innerText = selectedCard[0][j].cardDescription
+  }
+}
+
+function saveCardset(){
+  let cardsetName = prompt("Name the Cardset")
+  localStorage.setItem(cardsetName, JSON.stringify(cards))
+  cardContainer.innerHTML = ''
+  cards = []
+  console.log(localStorage)
 }
 
 
-window.addEventListener('keyup', (event) =>{
-  switch (event.key) {
-    case 'ArrowRight' :
-      rightArrowPressed = true
-      checkArrowPressed()
-      break
+//library
+const libraryGrid = document.getElementById('library-grid')
+const quizGrid = document.getElementById('first-section')
 
-    case 'ArrowLeft':
-      leftArrowPressed = true
-      checkArrowPressed()
-      break
+
+function createGrid(num, grid){
+  for (let i = 0; i < num; i++){
+    const new_div = document.createElement('div')
+    new_div.setAttribute('style', 'width: 80%; height: 300px; background-color: white; display: grid; place-items: center;')
+    grid.appendChild(new_div)
+    new_div.innerText = localStorage.key(i)
   }
-})
+}
 
 
-
-
-
-
-
-
-
-
-  
 
 
 

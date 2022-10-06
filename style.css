@@ -5,7 +5,7 @@
   font-family: 'DM Sans', sans-serif;
   padding: 0;
   margin: 0;
-  transition: all 0.4s ease-in-out
+  /* transition: all 0.4s ease-in-out */
 }
 
 body{
@@ -23,6 +23,7 @@ header{
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
 }
 
 .logo{
@@ -97,7 +98,13 @@ main{
   margin-top: 20px;
 }
 
-.practice{
+.save-button{
   font-size: 1rem;
   display: none;
+}
+
+.clear{
+  position: absolute;
+  bottom: 100px;
+  left: 200px;
 }

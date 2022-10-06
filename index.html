@@ -19,7 +19,7 @@
     <ul>
       <li><a onclick="changePage()" href="home.html">Home</a></li>
       <li><a onclick="changePage()" href="quiz.html">Learn</a></li>
-      <li><a href="#">Library</a></li>
+      <li><a href="library.html">Library</a></li>
       <button class="button">Create</button>
     </ul>
   </header>
@@ -38,7 +38,8 @@
     <div id="card-container" class="card-container">
     </div>
 
-    <button id="practice-button" class="practice" onclick="runFlashCard()">Practice</button>
+    <button id="save-button" class="button save-button" onclick="saveCardset()">Save</button>
+    <button onclick="clearAll()" class="button clear">Clear</button>
   </main>
 
   <!-- <main>
@@ -46,6 +47,7 @@
   </main> -->
 
   <script src="script.js"></script>
+  <script src="utility.js"></script>
 </body>
 
 </html>

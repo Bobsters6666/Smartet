@@ -1,7 +1,34 @@
-main{
+section{
+  margin: 15vh 10vh;
   display: grid;
   place-items: center;
+}
+
+.first-section{
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
+.second-section{
+  display: none;
+}
+
+.cards-grid{
+  width: 80%;
+  height: 300px;
+  background-color: white;
   position: relative;
+  display: grid;
+  place-items: center;
+  padding-bottom: 10%;
+}
+
+.practice-button{
+  position: absolute;
+  bottom: 0.1vh;
+  right: 50%;
+  transform: translate(50%, -50%)
 }
 
 .container-div{
@@ -11,6 +38,7 @@ main{
   display: grid;
   place-items: center;
   font-size: 1.75rem;
+  position: relative;
 }
 
 .initiate{
@@ -19,7 +47,7 @@ main{
 
 .arrow-buttons{
   position: absolute;
-  bottom: 30px;
+  bottom: 150px;
   display: flex;
   column-gap: 400px;
   display: none;
@@ -33,6 +61,7 @@ main{
   border: 2px solid transparent;
   background-color: rgb(178, 179, 228);
 }
+
 
 
 

@@ -18,25 +18,59 @@
       Smart<span class="et">et</span>
     </div>
     <ul>
-      <li><a onclick="changePage()" href="home.html">Home</a></li>
+      <li><a onclick="" href="home.html">Home</a></li>
       <li><a href="#">Learn</a></li>
-      <li><a href="#">Library</a></li>
-      <button class="button create"><a onclick="changePage()" href="index.html">Create</a></button>
+      <li><a href="library.html">Library</a></li>
+      <button class="button create"><a onclick="" href="index.html">Create</a></button>
     </ul>
   </header>
-
+  
   <main>
-    <div class="container-div" id="container-div">
-      <button class="button initiate" id="initiate-button" onclick="storeArray(), runFlashCard()">Start</button>
-    </div>
-
-    <div id="arrow-container" class="arrow-buttons">
-      <button class="arrow"  onclick="runFlashCard()">&#8592</button>
-      <button class="arrow" onclick="runFlashCard()" >&#8594</button>
-    </div>
+    <section class="first-section" id="first-section">
+      <div class="cards-grid">
+        <div class="cardset">**Empty**</div>
+        <button class="button practice-button" onclick="findSelectedFlashCard(0)">Practice</button>
+      </div>
+      <div class="cards-grid">
+        <div class="cardset">**Empty**</div>
+        <button class="button practice-button" onclick="findSelectedFlashCard(1)">Practice</button>
+      </div>
+      <div class="cards-grid">
+        <div class="cardset">**Empty**</div>
+        <button class="button practice-button" onclick="findSelectedFlashCard(2)">Practice</button>
+      </div>
+      <div class="cards-grid">
+        <div class="cardset">**Empty**</div>
+        <button class="button practice-button" onclick="findSelectedFlashCard(3)">Practice</button>
+      </div>
+      <div class="cards-grid">
+        <div class="cardset">**Empty**</div>
+        <button class="button practice-button" onclick="findSelectedFlashCard(4)">Practice</button>
+      </div>
+      <div class="cards-grid">
+        <div class="cardset">**Empty**</div>
+        <button class="button practice-button" onclick="findSelectedFlashCard(5)">Practice</button>
+      </div>
+    </section>
+    <section class="second-section" id="second-section">
+      <div class="container-div" id="container-div">
+        <button class="button initiate" id="initiate-button" onclick="runFlashCard()">Start</button>
+      </div>
+  
+      <div id="arrow-container" class="arrow-buttons">
+        <button class="arrow"  onclick="runFlashCard()">&#8592</button>
+        <button class="arrow" onclick="runFlashCard()" >&#8594</button>
+      </div>
+      <button class="button back-button" onclick="returnToPrevious()">Return</button>
+    </section>
   </main>
 
+
   <script src="script.js"></script>
+  <script src="utility.js"></script>
+  <script>
+  runFlashCard(cardSet)
+  </script>
 </body>
 
 </html>

@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <title>Smartet</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="library.css">
 </head>
 
 <body>
@@ -18,27 +18,26 @@
       Smart<span class="et">et</span>
     </div>
     <ul>
-      <li><a href="#">Home</a></li>
+      <li><a href="home.html">Home</a></li>
       <li><a onclick="" href="quiz.html">Learn</a></li>
-      <li><a href="library.html">Library</a></li>
+      <li><a href="#">Library</a></li>
       <button class="button"><a href="index.html" onclick="">Create</a></button>
     </ul>
   </header>
 
   <main>
-    <h1>Welcome to Smartet</h1>
-    <div class="carousel">
-      <div class="carousel-item">Stuff goes here</div>
-      <div class="carousel-item">Stuff goes here</div>
-      <div class="carousel-item">Stuff goes here</div>
-    </div>
-    <button class="home-start-button button">
-      <a onclick="changePage()" href="index.html">Get started now</a>
-    </button>
+    <section id="library-grid">
+      <!-- <div id="library-gridItems" class="library-gridItems">Empty</div>
+      <div id="library-gridItems" class="library-gridItems">Empty</div>
+      <div id="library-gridItems" class="library-gridItems">Empty</div>
+      <div id="library-gridItems" class="library-gridItems">Empty</div>
+      <div id="library-gridItems" class="library-gridItems">Empty</div>
+      <div id="library-gridItems" class="library-gridItems">Empty</div> -->
+    </section>
   </main>
-
   <script src="script.js"></script>
   <script src="utility.js"></script>
+  <script>createGrid(localStorage.length, libraryGrid)</script>
 </body>
 
 </html>

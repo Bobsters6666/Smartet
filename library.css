@@ -1,0 +1,16 @@
+section{
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 50px;
+  column-gap: 50px;
+  margin: 50px
+}
+
+.library-gridItems{
+  width: 80%;
+  height: 300px;
+  background-color: white;
+  display: grid;
+  place-items: center;
+}
