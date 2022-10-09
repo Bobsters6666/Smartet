@@ -1,3 +1,4 @@
+let isQuiz = false
 function clearAll(){
   localStorage.clear()
   cards = []
@@ -84,26 +85,30 @@ function checkKeyPressed(){
 
 
 window.addEventListener('keyup', (event) =>{
+  if (isQuiz){
+    switch (event.key) {
+      case 'ArrowRight' :
+        rightArrowPressed = true
+       
+        checkKeyPressed()
+        break
+  
+      case 'ArrowLeft':
+        leftArrowPressed = true
+        
+        checkKeyPressed()
+        break
+  
+      case ' ':
+        spacePressed = true
+        checkKeyPressed()
+        break
+    }
+  }
+
   switch (event.key) {
-    case 'ArrowRight' :
-      rightArrowPressed = true
-     
-      
-      checkKeyPressed()
-      break
-
-    case 'ArrowLeft':
-      leftArrowPressed = true
-      
-      checkKeyPressed()
-      break
-
     case 'Enter':
       enterPressed = true
-      checkKeyPressed()
-      break
-    case ' ':
-      spacePressed = true
       checkKeyPressed()
       break
   }
@@ -112,14 +117,18 @@ window.addEventListener('keyup', (event) =>{
 
 // prevent space bar from scrolling the page. 
 window.addEventListener('keydown', function(e) {
-  switch (e.key) {
-    case ' ' :
-      e.preventDefault();
-      break
-  }
+  if (isQuiz){
+    switch (e.key) {
+      case ' ' :
+        e.preventDefault();
+        break
+    }
+    }
   }
 );
 
 
-//must keep, somehow keeps animation working. 
-containerDiv.classList.toggle('hi')
+
+
+
+

@@ -24,6 +24,7 @@ function new_Card(){
   render()
 }
 
+
 //delete card by comparing the id of the bin clicked to the id of cards and delete the card that matches the id. 
 function deleteCard(binId){
   for (let i = 0; i < cards.length; i++ ){
@@ -145,9 +146,10 @@ function runCurrentFlashCard(cardsetName){
 function saveCardset(){
   let cardsetName = prompt("Name the Cardset")
   localStorage.setItem(cardsetName, JSON.stringify(cards))
-  cardContainer.innerHTML = ''
+  console.log(cards)
   cards = []
-  saveButton.style.display = 'none'
+  cardContainer.innerHTML = ''
+  // saveButton.style.display = 'none'
 }
 
 function createQuizCrid(){
@@ -161,31 +163,29 @@ const libraryEdit = document.getElementById('library-edit')
 // const editSaveButton = document.getElementById('save-edit-button')
 
 
-function deleteCardset(id){
+function deleteCardset(key){
   for (let i = 0; i < localStorage.length; i++ ){
-
-    //compares the id of the bin to the id of the key(0) in local storage
-    if(id == JSON.parse(localStorage.getItem(localStorage.key(i)))[0].id){
+    //compares the id of the bin to the keys in the local storage
+    if(key == (localStorage.key(i))){
       localStorage.removeItem(localStorage.key(i))
     }else{}
   }
 
   libraryGrid.innerHTML = ''
-  createGrid(localStorage.length)
+  createLibraryGrid(localStorage.length)
 }
 
-function editCardset(id) {
+function editCardset(key) {
   for (let i = 0; i < localStorage.length; i++ ){
-  if(id == JSON.parse(localStorage.getItem(localStorage.key(i)))[i].id){
+  if(key == localStorage.key(i)){
     libraryGrid.style.display = 'none'
     libraryEdit.style.display = 'block'
 
     //rememeber to parse!! 
     cards.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
     cards = cards[0]
-    
+    console.log(cards)
     render()
-    cards=[]
 
     //Returns the cardset name
     return (localStorage.key(i))
@@ -194,13 +194,23 @@ function editCardset(id) {
 }
 
 function saveCardsetEdit(){
-  const cardNameEdited = editCardset('f') 
-  console.log(localStorage) 
+  saveCardset()
+  libraryReset()
+}
+
+
+//Resets library to original layout and updates the library grid. 
+function libraryReset(){
+  libraryGrid.style.display = 'grid'
+  libraryEdit.style.display = 'none'
+  createLibraryGrid(localStorage.length)
+  cards = []
 }
 
 
 //Create the library grid, with number of cards equal to the items in local storage
 function createLibraryGrid(num){
+  libraryGrid.innerHTML = ''
   for (let i = 0; i < num; i++){
     const currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)))
 
@@ -214,16 +224,14 @@ function createLibraryGrid(num){
     newBinIcon.style = "width: 25px; position: absolute; right: 10px; bottom: 10px; cursor: pointer"
 
     //Assign the id of the first object in currentArray as the id of its delete and edit button. 
-    newBinIcon.id = currentArray[0].id
     newDiv.appendChild(newBinIcon)
-    newBinIcon.onclick = function(){deleteCardset(newBinIcon.id)}
+    newBinIcon.onclick = function(){deleteCardset(localStorage.key(i))}
     
     const newEditIcon = document.createElement('img')
     newEditIcon.src = "images/edit.png"
     newEditIcon.style = "width: 25px; position: absolute; left: 10px; bottom: 10px; cursor: pointer"
-    newEditIcon.id = currentArray[0].id
     newDiv.appendChild(newEditIcon)
-    // newEditIcon.onclick = function(){editCardset(newEditIcon.id)}
+    newEditIcon.onclick = function(){editCardset(localStorage.key(i))}
   }
 }
 

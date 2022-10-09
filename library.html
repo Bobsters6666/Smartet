@@ -50,13 +50,15 @@
       </div>
   
       <button id="save-edit-button" class="button save-edit-button" onclick="saveCardsetEdit()">Save</button>
+      <button class="button" onclick="libraryReset()">Return</button>
     </section>
   </main>
 
 
   <script src="script.js"></script>
   <script src="utility.js"></script>
-  <script>createLibraryGrid(localStorage.length)</script>
+  <script>createLibraryGrid(localStorage.length)
+  isQuiz = false </script>
 </body>
 
 </html>
