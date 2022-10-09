@@ -13,7 +13,26 @@ section{
 
 .second-section{
   display: none;
+  position: relative;
 }
+
+.bottom-bar, .top-bar{
+  position: absolute;
+  top: -100px;
+  left: -20vw;
+  height: 10px;
+  border-radius: 30px;
+}
+
+.bottom-bar{
+  background-color: rgb(213, 238, 213);
+  width: 75vw;
+}
+
+.top-bar{
+  background-color: rgb(122, 123, 180);
+}
+
 
 .cards-grid{
   width: 80%;
@@ -36,8 +55,8 @@ section{
 
 
 .container-div{
-  width: 500px;
-  height: 400px;
+  width: 450px;
+  height: 350px;
   background-color: white;
   display: grid;
   place-items: center;
@@ -48,7 +67,159 @@ section{
   transform-style: preserve-3d;
   transition: transform 1.5s;
   border-radius: 10px;
+  transition: translate ;
+  
 }
+
+.hi{
+  animation: shake .2s ease-in-out 1 ; 
+}
+
+.run-shake-animation{
+  animation: shake2 .2s ease-in-out 1; 
+}
+
+@keyframes shake {
+  0%{
+    transform: translate(0)
+  }
+  5%{
+    transform: translate(15px)
+  }
+  10%{
+    transform: translate(27px)
+  }
+  15%{
+    transform: translate(36px)
+  }
+  20%{
+    transform: translate(42px)
+  }
+  25%{
+    transform: translate(45px)
+  }
+  30%{
+    transform: translate(42px)
+  }
+  35%{
+    transform: translate(36px)
+  }
+  40%{
+    transform: translate(27px)
+  }
+  45%{
+    transform: translate(15px);
+  }
+  50%{
+    transform: translate(0px);
+  }
+  55%{
+    transform: translate(-15px)
+  }
+  60%{
+    transform: translate(-27px)
+  }
+  65%{
+    transform: translate(-36px)
+  }
+  70%{
+    transform: translate(-42px)
+  }
+  75%{
+    transform: translate(-45px)
+  }
+  80%{
+    transform: translate(-37px)
+  }
+  85%{
+    transform: translate(-27px)
+  }
+  95%{
+    transform: translate(-15px)
+  }
+  100%{
+    transform: translate(0)
+  }
+}
+
+
+@keyframes shake2 {
+  0%{
+    transform: translate(0)
+  }
+  5%{
+    transform: translate(15px)
+  }
+  10%{
+    transform: translate(27px)
+  }
+  15%{
+    transform: translate(36px)
+  }
+  20%{
+    transform: translate(42px)
+  }
+  25%{
+    transform: translate(45px)
+  }
+  30%{
+    transform: translate(42px)
+  }
+  35%{
+    transform: translate(36px)
+  }
+  40%{
+    transform: translate(27px)
+  }
+  45%{
+    transform: translate(15px);
+  }
+  50%{
+    transform: translate(0px);
+  }
+  55%{
+    transform: translate(-15px)
+  }
+  60%{
+    transform: translate(-27px)
+  }
+  65%{
+    transform: translate(-36px)
+  }
+  70%{
+    transform: translate(-42px)
+  }
+  75%{
+    transform: translate(-45px)
+  }
+  80%{
+    transform: translate(-37px)
+  }
+  85%{
+    transform: translate(-27px)
+  }
+  95%{
+    transform: translate(-15px)
+  }
+  100%{
+    transform: translate(0)
+  }
+}
+
+
+
+/* .current-container-div{
+  animation-name: slide-out;
+  animation-duration: 0.4s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+}
+
+@keyframes slide-out{
+  from{transform: translateX(0)}
+  to{transform: translateX(-1200px)}
+} */
+
 
 .test{
   position: absolute;
@@ -81,7 +252,8 @@ section{
 }
 
 .card-back{
- transform: rotateX(180deg)
+ transform: rotateX(180deg);
+ background-color: rgb(245, 245, 245)
 }
 
 .initiate{

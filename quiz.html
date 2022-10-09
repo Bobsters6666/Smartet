@@ -19,9 +19,9 @@
     </div>
     <ul>
       <li><a onclick="" href="home.html">Home</a></li>
-      <li><a href="#">Learn</a></li>
+      <li><a href="#">Practice</a></li>
       <li><a href="library.html">Library</a></li>
-      <button class="button create"><a onclick="" href="index.html">Create</a></button>
+      <li><a href="index.html" onclick="" class="button">Create</a></li>
     </ul>
   </header>
   
@@ -53,7 +53,9 @@
       </div>
     </section>
     <section class="second-section" id="second-section">
-      <div class="container-div" id="container-div">
+      <div  class="bottom-bar"></div>
+      <div id="top-progress-bar" class="top-bar"></div>
+      <div class="container-div current-container-div" id="container-div">
 
         <div id="card-name-div" class="card-front"></div>
         <div id="card-description-div" class="card-back"></div>
@@ -64,21 +66,24 @@
         </div>  
       </div>
       <div class="container-div test">
-        Hello
+
       </div>
       
       <div class="container-div test2">
-        Hello
+
       </div>
       
       <div class="container-div test3">
-        Hello
       </div>
       
       <button class="button back-button" onclick="returnToPrevious()">Return</button>
+      <button class="button" id="test">Test</button>
     </section>
   </main>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw==" 
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer"></script>
 
   <script src="script.js"></script>
   <script src="utility.js"></script>

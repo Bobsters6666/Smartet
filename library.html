@@ -19,9 +19,9 @@
     </div>
     <ul>
       <li><a href="home.html">Home</a></li>
-      <li><a onclick="" href="quiz.html">Learn</a></li>
+      <li><a onclick="" href="quiz.html">Practice</a></li>
       <li><a href="#">Library</a></li>
-      <button class="button"><a href="index.html" onclick="">Create</a></button>
+      <li><a href="index.html" onclick="" class="button">Create</a></li>
     </ul>
   </header>
 
@@ -49,14 +49,14 @@
       <div id="card-container" class="card-container">
       </div>
   
-      <button id="save-button" class="button save-button" onclick="saveCardset()">Save</button>
+      <button id="save-edit-button" class="button save-edit-button" onclick="saveCardsetEdit()">Save</button>
     </section>
   </main>
 
 
   <script src="script.js"></script>
   <script src="utility.js"></script>
-  <script>createGrid(localStorage.length, libraryGrid)</script>
+  <script>createLibraryGrid(localStorage.length)</script>
 </body>
 
 </html>

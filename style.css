@@ -46,11 +46,14 @@ ul{
 .button{
   padding: 0.6rem 1.25rem;
   font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
   background-color: rgb(102, 102, 248);
   color: white;
-  border-radius: 20px;
+  border-radius: 50px;
   border: 2px solid transparent;
   cursor: pointer;
+  display: inline-block;
 }
 
 button:hover{

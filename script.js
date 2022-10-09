@@ -18,6 +18,9 @@ function new_Card(){
   })
   cardName.value = ''
   cardDescription.value = ''
+
+  //Moves the cursor to the first input box, to make add multiple cards easier. No need to manually click. 
+  cardName.focus()
   render()
 }
 
@@ -52,9 +55,7 @@ function render(){
     divDescription.appendChild(binIcon)
     binIcon.onclick = function(){deleteCard(binIcon.id)}
 
-    if (cards[0].length > 0 || cards.length > 1) {
-      saveButton.style.display = 'inline-block'
-    } else{saveButton.style.display = 'none'}
+   
   })
 }
 
@@ -69,6 +70,7 @@ const secondSection = document.getElementById('second-section')
 const flashcardContainer = document.getElementById('flashcard-container')
 const cardNameDiv = document.getElementById('card-name-div')
 const cardDescriptionDiv = document.getElementById('card-description-div')
+const topProgressBar = document.getElementById('top-progress-bar')
 
 //stores cards array in local storage so doesn't get reset when swapping html files / pages
 
@@ -86,6 +88,22 @@ isCardName = true;
 //shifting each new card slighting off center to create thickness. 
 let cardShiftX = 0 
 let cardShiftY = 0
+
+
+
+// function createQuizCardset(){
+//   const newCard = document.createElement('div')
+//   newCard.classList.add('container-div')
+//   secondSection.appendChild(newCard)
+// }
+
+function showSaveButton(){
+  if (cards[0].length > 0 || cards.length > 1) {
+    saveButton.style.display = 'inline-block'
+  } else{saveButton.style.display = 'none'}
+  console.log(3)
+}
+
 
 function runFlashCard(item){
 
@@ -107,7 +125,6 @@ function findSelectedFlashCard(index){
     if (selectedId[i] == practiceButton[index].id) {
       firstSection.style.display = 'none'
       secondSection.style.display = 'inline-block'
-      arrowContainer.style.display = 'flex'
 
       runCurrentFlashCard(localStorage.key(i))
 
@@ -133,24 +150,28 @@ function saveCardset(){
   saveButton.style.display = 'none'
 }
 
+function createQuizCrid(){
+
+}
 
 //library 
 const libraryGrid = document.getElementById('library-grid')
 const quizGrid = document.getElementById('first-section')
 const libraryEdit = document.getElementById('library-edit')
+// const editSaveButton = document.getElementById('save-edit-button')
 
 
 function deleteCardset(id){
   for (let i = 0; i < localStorage.length; i++ ){
 
-    //compares the id of the bin to the id of the key(i) in local storage
-    if(id == JSON.parse(localStorage.getItem(localStorage.key(i)))[i].id){
+    //compares the id of the bin to the id of the key(0) in local storage
+    if(id == JSON.parse(localStorage.getItem(localStorage.key(i)))[0].id){
       localStorage.removeItem(localStorage.key(i))
     }else{}
   }
 
   libraryGrid.innerHTML = ''
-  createGrid(localStorage.length, libraryGrid)
+  createGrid(localStorage.length)
 }
 
 function editCardset(id) {
@@ -158,35 +179,49 @@ function editCardset(id) {
   if(id == JSON.parse(localStorage.getItem(localStorage.key(i)))[i].id){
     libraryGrid.style.display = 'none'
     libraryEdit.style.display = 'block'
-    cards.push(localStorage.getItem(localStorage.key(i)))
+
+    //rememeber to parse!! 
+    cards.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+    cards = cards[0]
+    
+    render()
     cards=[]
-    console.log(cards)
+
+    //Returns the cardset name
+    return (localStorage.key(i))
   }else{}
   }
 }
 
+function saveCardsetEdit(){
+  const cardNameEdited = editCardset('f') 
+  console.log(localStorage) 
+}
+
 
 //Create the library grid, with number of cards equal to the items in local storage
-function createGrid(num, grid){
+function createLibraryGrid(num){
   for (let i = 0; i < num; i++){
     const currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)))
 
     const newDiv = document.createElement('div')
     newDiv.setAttribute('style', 'width: 80%; height: 300px; background-color: white; display: grid; place-items: center; position: relative; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 0, 0, 0.3)')
-    grid.appendChild(newDiv)
+    libraryGrid.appendChild(newDiv)
     newDiv.innerText = localStorage.key(i)
 
     const newBinIcon = document.createElement('img')
     newBinIcon.src = "images/bin.png"
     newBinIcon.style = "width: 25px; position: absolute; right: 10px; bottom: 10px; cursor: pointer"
-    newBinIcon.id = currentArray[i].id
+
+    //Assign the id of the first object in currentArray as the id of its delete and edit button. 
+    newBinIcon.id = currentArray[0].id
     newDiv.appendChild(newBinIcon)
     newBinIcon.onclick = function(){deleteCardset(newBinIcon.id)}
     
     const newEditIcon = document.createElement('img')
     newEditIcon.src = "images/edit.png"
     newEditIcon.style = "width: 25px; position: absolute; left: 10px; bottom: 10px; cursor: pointer"
-    newEditIcon.id = currentArray[i].id
+    newEditIcon.id = currentArray[0].id
     newDiv.appendChild(newEditIcon)
     // newEditIcon.onclick = function(){editCardset(newEditIcon.id)}
   }
@@ -196,10 +231,3 @@ function createGrid(num, grid){
 
 
 
-
-
-
-
-
-
-console.log(cards)

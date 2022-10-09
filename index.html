@@ -18,7 +18,7 @@
     </div>
     <ul>
       <li><a onclick="changePage()" href="home.html">Home</a></li>
-      <li><a onclick="changePage()" href="quiz.html">Learn</a></li>
+      <li><a onclick="changePage()" href="quiz.html">Practice</a></li>
       <li><a href="library.html">Library</a></li>
       <button class="button">Create</button>
     </ul>
@@ -28,7 +28,7 @@
     <div class="container-inputs">
       <input type="text" class="textbox" id="card-name">
       <input type="text" class="textbox" id="card-description">
-      <button id="click" class="button create-new" onclick="new_Card()">Create New</button>
+      <button id="click" class="button create-new" onclick="new_Card(), showSaveButton()">Create New</button>
     </div>
     <div class="container-title">
       <h3>Card</h3>
