@@ -193,6 +193,33 @@ function editCardset(key) {
   }
 }
 
+function editCardsetName(key, div){
+  console.log(key)
+  const newInput = document.createElement('input')
+  newInput.value = key
+  newInput.style = 'position: absolute; top: 45%; padding: 2px 10px; text-align: center'
+  div.appendChild(newInput)
+  
+  const newSaveButton = document.createElement('button')
+  newSaveButton.classList.add('button')
+  newSaveButton.style = 'position: absolute; top: 70%;'
+  newSaveButton.innerText = 'save'
+  div.appendChild(newSaveButton)
+
+  newSaveButton.onclick = () => {
+    localStorage[newInput.value] = localStorage.getItem(key)
+    if ( key != newInput.value){
+      localStorage.removeItem(key)
+    }
+    createLibraryGrid(localStorage.length)
+  }
+ 
+  console.log(localStorage)
+}
+
+
+
+
 function saveCardsetEdit(){
   saveCardset()
   libraryReset()
@@ -208,16 +235,22 @@ function libraryReset(){
 }
 
 
+
 //Create the library grid, with number of cards equal to the items in local storage
 function createLibraryGrid(num){
   libraryGrid.innerHTML = ''
   for (let i = 0; i < num; i++){
     const currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)))
-
     const newDiv = document.createElement('div')
-    newDiv.setAttribute('style', 'width: 80%; height: 300px; background-color: white; display: grid; place-items: center; position: relative; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 0, 0, 0.3)')
+    newDiv.setAttribute('style', 'width: 80%; height: 300px; background-color: white; display: grid; place-items: center; position: relative; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 0, 0, 0.3); position: relative')
     libraryGrid.appendChild(newDiv)
     newDiv.innerText = localStorage.key(i)
+
+    const nameEditIcon = document.createElement('img')
+    nameEditIcon.src = "images/name-edit.png"
+    nameEditIcon.style = "width: 20px; position: absolute; right: 20px; top 0; cursor: pointer"
+    newDiv.appendChild(nameEditIcon)
+    nameEditIcon.onclick = function(){editCardsetName(localStorage.key(i), newDiv)}
 
     const newBinIcon = document.createElement('img')
     newBinIcon.src = "images/bin.png"

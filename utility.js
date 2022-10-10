@@ -11,6 +11,8 @@ function returnToPrevious(){
   firstSection.style.display = 'grid'
   secondSection.style.display = 'none'
   selectedCard = []
+  topProgressBarLength = 0
+  gsap.to('#top-progress-bar', {width: topProgressBarLength + 'vw', duration: 1 })
   j = 0
 }
 
@@ -64,6 +66,7 @@ function checkKeyPressed(){
     enterPressed = false
   }
 
+
   else if(spacePressed && isCardName) {
     rotation = (rotation + angle) % 360
     containerDiv.style.transition = 'transform 0.4s ease'
@@ -112,6 +115,7 @@ window.addEventListener('keyup', (event) =>{
       checkKeyPressed()
       break
   }
+  
 })
 
 
