@@ -56,22 +56,19 @@ function render(){
     divDescription.appendChild(binIcon)
     binIcon.onclick = function(){deleteCard(binIcon.id)}
 
-   
   })
 }
 
 //quiz
 const containerDiv = document.getElementById('container-div')
 const runFlashCardButton = document.getElementById('initiate-button')
-const arrowContainer = document.getElementById('arrow-container')
 const cardSet = document.getElementsByClassName('cardset')
-const practiceButton = document.getElementsByClassName('practice-button')
 const firstSection = document.getElementById('first-section')
 const secondSection = document.getElementById('second-section')
 const flashcardContainer = document.getElementById('flashcard-container')
-const cardNameDiv = document.getElementById('card-name-div')
-const cardDescriptionDiv = document.getElementById('card-description-div')
-const topProgressBar = document.getElementById('top-progress-bar')
+const currentCardNumber = document.getElementById('current-card-number')
+const quizLeftSection = document.getElementById('left-section')
+const quizLeftSection2 = document.getElementById('left-section-2')
 
 //stores cards array in local storage so doesn't get reset when swapping html files / pages
 
@@ -84,77 +81,102 @@ let rightArrowPressed = false
 let enterPressed = false
 let spacePressed = false
 
-isCardName = true;
+let isCardName = true;
+let isPractice = false;
+let isTest = false;
+let isCardsetEdit = false;
 
-//shifting each new card slighting off center to create thickness. 
-let cardShiftX = 0 
-let cardShiftY = 0
+function createQuizGrid(num){
+ for (let i = 0; i < num; i++){
+    const currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)))
+    const newDiv = document.createElement('div')
+    newDiv.classList.add('cards-grid')
+    firstSection.appendChild(newDiv)
 
-
-
-// function createQuizCardset(){
-//   const newCard = document.createElement('div')
-//   newCard.classList.add('container-div')
-//   secondSection.appendChild(newCard)
-// }
-
-function showSaveButton(){
-  if (cards[0].length > 0 || cards.length > 1) {
-    saveButton.style.display = 'inline-block'
-  } else{saveButton.style.display = 'none'}
-  console.log(3)
-}
+    const nameDiv = document.createElement('p')
+    nameDiv.style = "position: absolute; display: grid; place-items: center; width: 65%; height 70%; overflow-wrap: anywhere; padding-bottom: 10%;"
+    nameDiv.innerText = localStorage.key(i)
+    newDiv.appendChild(nameDiv)
 
 
-function runFlashCard(item){
+    const newPracticeButton = document.createElement('button')
+    newPracticeButton.innerText = 'Pratice'
+    newPracticeButton.classList.add('button', 'practice-button')
+    newDiv.appendChild(newPracticeButton)
+    newPracticeButton.onclick = function(){runFlashCard(currentArray)}
 
-  //rewrite the text within the cardSet to the key of the local storage (i)
-  for (let i = 0; i < localStorage.length; i++ ){
-    item[i].innerText = localStorage.key(i)
-
-    //need to JSON.parse otherwise currentObject[0] will not give the first object, instead it will give the first letter. 
-    let currentObject = JSON.parse(localStorage.getItem(localStorage.key(i)))
-    selectedId.push(currentObject[0].id)
-    practiceButton[i].id = currentObject[0].id
-    
+    const newTestButton = document.createElement('button')
+    newTestButton.innerText = 'Test'
+    newTestButton.classList.add('button', 'test-button')
+    newDiv.appendChild(newTestButton)
+    newTestButton.onclick = function(){runFlashCardTest(currentArray)}
   }
 }
 
-//checks the id of the button pressed with the id of cardSets to see which cardSet matches it. 
-function findSelectedFlashCard(index){
-  for (let i = 0; i < selectedId.length; i ++) {
-    if (selectedId[i] == practiceButton[index].id) {
-      firstSection.style.display = 'none'
-      secondSection.style.display = 'inline-block'
 
-      runCurrentFlashCard(localStorage.key(i))
+function runFlashCard(key) {
 
-    }else{}
-  } 
-}
+  containerDiv.innerText = ''
 
-//Takes in the cardset name and uses it to grab the value from local storage associated with it and push to selectedCard array. Then using that to edit the flashcard cotent. 
-function runCurrentFlashCard(cardsetName){
-  selectedCard.push(JSON.parse(localStorage.getItem(cardsetName)))
+  isPractice = true
+
+  //Save the initial key into an empty array so the key can be used without requiring the function caller to have access to the initial key. e.g. when running this function is keysPressed(). 
+  selectedCard.push(key)
+
+  firstSection.style.display = 'none'
+  secondSection.style.display = 'grid'
+  
+  quizLeftSection.style.display = 'none'
+  quizLeftSection2.style.display = 'grid'
+  
+  const cardNameDiv = document.createElement('div')
+  cardNameDiv.classList.add('card-front')
+  containerDiv.appendChild(cardNameDiv)
+
+  const cardDescriptionDiv = document.createElement('div')
+  cardDescriptionDiv.classList.add('card-back')
+  containerDiv.appendChild(cardDescriptionDiv)
 
   cardNameDiv.innerText = selectedCard[0][j].cardName
   cardDescriptionDiv.innerText = selectedCard[0][j].cardDescription
 
-}
-
-//Ask user for card name, then save the name and content as an object in local storage. Reset cards and card container. 
-function saveCardset(){
-  let cardsetName = prompt("Name the Cardset")
-  localStorage.setItem(cardsetName, JSON.stringify(cards))
-  console.log(cards)
-  cards = []
-  cardContainer.innerHTML = ''
-  // saveButton.style.display = 'none'
-}
-
-function createQuizCrid(){
+  currentCardNumber.innerHTML = (j + 1) + '/' + selectedCard[0].length
 
 }
+
+const newInput2 = document.createElement('input')
+newInput2.rows = 1
+newInput2.classList.add('textbox')
+
+
+function runFlashCardTest(key){
+
+  selectedCard.push(key)
+
+  quizLeftSection.style.display = 'grid'
+  quizLeftSection2.style.display = 'none'
+
+  containerDiv.innerText = ''
+
+  isTest = true
+  
+  firstSection.style.display = 'none'
+  secondSection.style.display = 'grid'
+
+  const nameDiv = document.createElement('p')
+  nameDiv.style = "position: absolute; display: grid; place-items: center; width: 65%; height 70%; overflow-wrap: anywhere; padding-top: 20%;"
+  nameDiv.innerText = selectedCard[0][j].cardName
+  containerDiv.appendChild(nameDiv)
+
+  newInput2.value = ''
+
+  nameDiv.appendChild(newInput2)
+
+  currentCardNumber.innerHTML = (j + 1) + '/' + selectedCard[0].length
+
+}
+
+
 
 //library 
 const libraryGrid = document.getElementById('library-grid')
@@ -164,40 +186,31 @@ const libraryEdit = document.getElementById('library-edit')
 
 
 function deleteCardset(key){
-  for (let i = 0; i < localStorage.length; i++ ){
-    //compares the id of the bin to the keys in the local storage
-    if(key == (localStorage.key(i))){
-      localStorage.removeItem(localStorage.key(i))
-    }else{}
-  }
 
-  libraryGrid.innerHTML = ''
+  localStorage.removeItem(key)
   createLibraryGrid(localStorage.length)
+
 }
 
 function editCardset(key) {
-  for (let i = 0; i < localStorage.length; i++ ){
-  if(key == localStorage.key(i)){
-    libraryGrid.style.display = 'none'
-    libraryEdit.style.display = 'block'
 
-    //rememeber to parse!! 
-    cards.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-    cards = cards[0]
-    console.log(cards)
-    render()
+  isCardsetEdit = true 
 
-    //Returns the cardset name
-    return (localStorage.key(i))
-  }else{}
-  }
+  libraryGrid.style.display = 'none'
+  libraryEdit.style.display = 'block'
+
+  //rememeber to parse!! 
+  cards.push(JSON.parse(localStorage.getItem(key)))
+  cards = cards[0]
+  render()
+
 }
 
-function editCardsetName(key, div){
-  console.log(key)
-  const newInput = document.createElement('input')
+function editCardsetName(key, div, nameDiv){
+  const newInput = document.createElement('textarea')
   newInput.value = key
-  newInput.style = 'position: absolute; top: 45%; padding: 2px 10px; text-align: center'
+  newInput.rows = 1
+  newInput.style = 'position: absolute; top: 45%; padding: 10px 10px; text-align: center; height 20px;'
   div.appendChild(newInput)
   
   const newSaveButton = document.createElement('button')
@@ -206,17 +219,17 @@ function editCardsetName(key, div){
   newSaveButton.innerText = 'save'
   div.appendChild(newSaveButton)
 
+  nameDiv.innerText = ''
+
   newSaveButton.onclick = () => {
     localStorage[newInput.value] = localStorage.getItem(key)
-    if ( key != newInput.value){
+    if (key != newInput.value){
       localStorage.removeItem(key)
     }
     createLibraryGrid(localStorage.length)
   }
  
-  console.log(localStorage)
 }
-
 
 
 
@@ -240,23 +253,24 @@ function libraryReset(){
 function createLibraryGrid(num){
   libraryGrid.innerHTML = ''
   for (let i = 0; i < num; i++){
-    const currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)))
     const newDiv = document.createElement('div')
     newDiv.setAttribute('style', 'width: 80%; height: 300px; background-color: white; display: grid; place-items: center; position: relative; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 0, 0, 0.3); position: relative')
     libraryGrid.appendChild(newDiv)
-    newDiv.innerText = localStorage.key(i)
+
+    const nameDiv = document.createElement('p')
+    nameDiv.style = "position: absolute; display: grid; place-items: center; width: 65%; height 70%; overflow-wrap: anywhere;"
+    nameDiv.innerText = localStorage.key(i)
+    newDiv.appendChild(nameDiv)
 
     const nameEditIcon = document.createElement('img')
     nameEditIcon.src = "images/name-edit.png"
     nameEditIcon.style = "width: 20px; position: absolute; right: 20px; top 0; cursor: pointer"
     newDiv.appendChild(nameEditIcon)
-    nameEditIcon.onclick = function(){editCardsetName(localStorage.key(i), newDiv)}
+    nameEditIcon.onclick = function(){editCardsetName(localStorage.key(i), newDiv, nameDiv)}
 
     const newBinIcon = document.createElement('img')
     newBinIcon.src = "images/bin.png"
     newBinIcon.style = "width: 25px; position: absolute; right: 10px; bottom: 10px; cursor: pointer"
-
-    //Assign the id of the first object in currentArray as the id of its delete and edit button. 
     newDiv.appendChild(newBinIcon)
     newBinIcon.onclick = function(){deleteCardset(localStorage.key(i))}
     

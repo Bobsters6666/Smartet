@@ -1,5 +1,5 @@
 section{
-  margin: 15vh 10vh;
+  margin: 25vh 2vh;
   display: grid;
   place-items: center;
   position: relative;
@@ -14,12 +14,61 @@ section{
 .second-section{
   display: none;
   position: relative;
+  grid-template-columns: 3fr 4fr 3fr;
+  column-gap: 2vw;
+}
+
+.left-section{
+  display: grid;
+  place-content: center;
+  row-gap: 30px;
+  border: 2px solid rgb(151, 102, 214);
+  padding: 80px 50px;
+  background-color: rgb(250, 250, 250);
+  display: none;
+}
+
+.left-bar{
+  width: 200px;
+  height: 40px;
+  background-color: white;
+  display: grid;
+  place-content: center;
+  border: 2px solid black;
+  position: relative;
+  border-radius: 5px;
+}
+
+.correct-bottom-bar, .correct-top-bar, .wrong-bottom-bar, .wrong-top-bar{
+  height: 40px;
+  position: absolute;
+}
+
+
+.correct-bottom-bar{
+  background-color: rgb(182, 224, 182);
+  width: 200px;
+  
+}
+
+.correct-top-bar{
+  background-color: rgb(14, 177, 14);
+  position: absolute;
+}
+
+.wrong-bottom-bar{
+  background-color:#fdbcbc;
+  width: 200px;
+}
+
+.wrong-top-bar{
+  background-color: rgb(224, 41, 41);
 }
 
 .bottom-bar, .top-bar{
   position: absolute;
-  top: -100px;
-  left: -20vw;
+  top: -60px;
+  left: 12.5vw;
   height: 10px;
   border-radius: 30px;
 }
@@ -41,28 +90,35 @@ section{
   position: relative;
   display: grid;
   place-items: center;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  overflow-wrap: anywhere;
 }
 
 .practice-button{
   position: absolute;
   bottom: 0.1vh;
-  right: 50%;
+  right: 63%;
+  transform: translate(50%, -50%)
+}
+
+.test-button{
+  position: absolute;
+  bottom: 0.1vh;
+  right: 32%;
   transform: translate(50%, -50%)
 }
 
 
 .container-div{
-  width: 450px;
-  height: 350px;
+  width: 500px;
+  height: 415px;
   background-color: white;
   display: grid;
   place-items: center;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
-  padding: 50px 50px; 
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1.5s;
@@ -70,6 +126,44 @@ section{
   transition: translate ;
   
 }
+
+.card-front, .card-back{
+  position: absolute; 
+  display: grid; 
+  place-items: center; 
+  width: 80%; 
+  height: 80%; 
+  backface-visibility: hidden;
+}
+
+.card-back{
+ transform: rotateX(180deg);
+}
+
+.initiate{
+  font-size: 1rem;
+}
+
+
+.back-button{
+  margin-top: 50px;
+}
+
+.textbox{
+  padding: 10px 20px; 
+  z-index: 1000; 
+  width: 60%; border: 
+  1px solid black; 
+  border-radius: 8px; 
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5); 
+  margin-top: 20%; 
+}
+
+
+
+
+
+
 
 .hi{
   animation: shake .2s ease-in-out 1 ; 
@@ -205,70 +299,4 @@ section{
     transform: translate(0)
   }
 }
-
-
-
-/* .current-container-div{
-  animation-name: slide-out;
-  animation-duration: 0.4s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-}
-
-@keyframes slide-out{
-  from{transform: translateX(0)}
-  to{transform: translateX(-1200px)}
-} */
-
-
-.test{
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  z-index: -1
-}
-
-.test2{
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  z-index: -2
-
-}
-.test3{
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  z-index: -3;
-}
-
-.card-front, .card-back{
-  position: absolute; 
-  display: grid; 
-  place-items: center; 
-  width: 100%; 
-  height: 100%; 
-  backface-visibility: hidden;
-}
-
-.card-back{
- transform: rotateX(180deg);
- background-color: rgb(245, 245, 245)
-}
-
-.initiate{
-  font-size: 1rem;
-}
-
-
-.back-button{
-  margin-top: 50px;
-}
-
-
-
-
-
-
-
 
