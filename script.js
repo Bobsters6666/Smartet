@@ -192,6 +192,9 @@ function runFlashCardTest(key){
 
   nameDiv.appendChild(newInput2)
 
+  //automatically moves the cursor inside the input box. 
+  newInput2.focus()
+
   currentCardNumber.innerHTML = (j + 1) + '/' + selectedCard[0].length
 
 }
